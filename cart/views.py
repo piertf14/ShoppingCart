@@ -6,7 +6,7 @@ from django.shortcuts import render, redirect
 from django.contrib.auth import login, logout
 from django.contrib.auth.forms import AuthenticationForm
 from django.views.generic import ListView, FormView, TemplateView, View
-from .mixim import LoginRequireMixin
+from .mixin import LoginRequireMixin
 from .models import Course, Purchase
 from .shoppingcart import Cart
 
@@ -96,7 +96,7 @@ class AddView(TemplateView):
         cart = Cart(request.session)
         course = Course.objects.get(id=self.kwargs.get('pk'))
         cart.add(course, price=course.price)
-        return redirect('/')
+        return redirect('courses')
 
 
 class DeleteView(LoginRequireMixin, TemplateView):
@@ -107,7 +107,7 @@ class DeleteView(LoginRequireMixin, TemplateView):
         cart = Cart(request.session)
         course = Course.objects.get(id=self.kwargs.get('pk'))
         cart.remove(course)
-        return redirect('/cart/')
+        return redirect('cart')
 
 
 class BuyView(LoginRequireMixin, TemplateView):
@@ -124,5 +124,5 @@ class BuyView(LoginRequireMixin, TemplateView):
             purchase.quantity = cart.quantity(course)
             purchase.save()
 
-        cart.clear
-        return redirect('/')
+        cart.clear()
+        return redirect('courses')
