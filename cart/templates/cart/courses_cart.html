@@ -1,0 +1,53 @@
+
+{% extends "cart/layout.html" %}
+{% load staticfiles %}
+
+{% block content %}
+{% load course_tags %}
+<div class="container">
+	<br>
+	<h1 class="text-center">Shopping Cart</h1>
+	<br>
+
+	{% get_cart as cart %}
+
+	    <table class="table">
+	    	<thead>
+			    <tr>
+			        <th>Cart</th>
+			        <th>Quantity</th>
+			        <th>Price</th>
+			        <th>#</th>
+			    </tr>
+	    </thead>
+	    
+	    <tbody>
+	    	{% for item in cart.items %}
+	    	<tr>
+		        <td>{{ item.course }}</td>
+		        <td>{{ item.quantity }}</td>
+		        <td>{{ item.subtotal }}</td>
+		        <td>
+		        	<a href="/cart/{{item.course.pk}}/delete/" class="btn btn-danger btn-sm">
+					  Eliminar
+					</a>
+		        </td>
+		    </tr>
+
+		    {% endfor %}
+		    <tr>
+		    	<td colspan="2"></td>
+		    	<td>Total: {{ cart.total }}</td>
+		    	<td><a href="{% url 'buy' %}" class="btn btn-success btn-sm">
+					  Comprar
+					</a>
+				</td>
+		    </tr>
+	    </tbody>	    
+	    
+	    </table>
+
+	    
+</div>
+
+{% endblock content %} 

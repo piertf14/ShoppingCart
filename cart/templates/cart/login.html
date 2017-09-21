@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Shopping Cart</title>
+
+    {% load staticfiles %}
+    <!-- Bootstrap core CSS -->
+    <link href="{% static 'vendor/bootstrap/css/bootstrap.min.css' %}" rel="stylesheet">
+
+    <!-- Custom styles for this template -->
+    <link href="{% static 'css/shop-homepage.css' %}" rel="stylesheet">
+
+</head>
+
+<body>
+    <div class="content">
+        <div class="row">
+        <div class="col-md-4"></div>                   
+            <div class="col-md-4 col-md-offset-6">
+                <div class="text-center">
+                    <div>
+                        <div>
+
+                            <h1 class="logo-name">Shopping Card</h1>
+
+                        </div>
+                        
+                        
+                        <p>Login</p>
+                        <form class="m-t" role="form" action="" method="post">
+                            {% csrf_token %}
+                            {% for error in form.non_field_errors %}
+                                <span class="help-block m-b-none text-danger">{{ error|escape }}</span>
+                            {% endfor %}
+                            <div class="form-group">
+                                
+                                <input type="text" class="form-control" name="username" placeholder="Username" >
+                                {% for error in form.username.errors %}
+                                    <span class="help-block m-b-none text-danger">{{ error|escape }}</span>
+                                {% endfor %}
+                            </div>
+                            <div class="form-group">
+                                <input type="password" name="password" class="form-control" placeholder="Password" >
+                                {% for error in form.password.errors %}
+                                    <span class="help-block m-b-none text-danger">{{ error|escape }}</span>
+                                {% endfor %}
+                            </div>
+                            
+                            <button type="submit" class="btn btn-primary block full-width m-b">Login</button>
+
+                            
+                            <!-- <a href="#"><small>Olvidé mi contraseña</small></a> -->
+                           
+                        </form>
+                        <p class="m-t"> <small>Copyright &copy; Your Website 2017</small> </p>
+                    </div>
+                </div>            
+            </div>
+        </div>        
+    </div>    
+
+    <!-- Mainly scripts -->
+    <script src="{% static 'vendor/jquery/jquery.min.js' %}"></script>
+    <script src="{% static 'vendor/popper/popper.min.js' %}"></script>
+    <script src="{% static 'vendor/bootstrap/js/bootstrap.min.js' %}"></script>
+
+</body>
+
+</html>
